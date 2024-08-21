@@ -15,17 +15,34 @@ def load_pickle(file_path):
     return obj
 
 
+# def build_files_list(root_dir, normal_dir="normal", abnormal_dir="abnormal"):
+#    normal_files = []
+#    abnormal_files = []
+
+#    for root, _, files in os.walk(top=os.path.join(root_dir)):
+#        for name in files:
+#            current_dir_type = os.path.basename(root)
+#            if current_dir_type == normal_dir:
+#                normal_files.append(os.path.join(root, name))
+#            if current_dir_type == abnormal_dir:
+#                abnormal_files.append(os.path.join(root, name))
+
+#   return normal_files, abnormal_files
+
+
 def build_files_list(root_dir, normal_dir="normal", abnormal_dir="abnormal"):
     normal_files = []
     abnormal_files = []
 
     for root, _, files in os.walk(top=os.path.join(root_dir)):
         for name in files:
-            current_dir_type = root.split("/")[-1]
+            current_dir_type = os.path.basename(root)
             if current_dir_type == normal_dir:
                 normal_files.append(os.path.join(root, name))
             if current_dir_type == abnormal_dir:
                 abnormal_files.append(os.path.join(root, name))
+    
+    print(f"Found {len(normal_files)} normal files and {len(abnormal_files)} abnormal files in {root_dir}")     
 
     return normal_files, abnormal_files
 
